@@ -119,7 +119,8 @@ class UserController extends Controller
      */
     public function getUserSublist($name, $key)
     {
-        $query = Character::myo(0)->where('user_id', $this->user->id);
+        $first = Character::myo(0)->where('coowner_id', $this->user->id);
+        $query = Character::myo(0)->where('user_id', $this->user->id)->union($first);
         $imageQuery = CharacterImage::images(Auth::check() ? Auth::user() : null)->with('features')->with('rarity')->with('species')->with('features');
 
         $sublist = Sublist::where('key', $key)->first();
