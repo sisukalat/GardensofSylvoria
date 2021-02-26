@@ -60,6 +60,7 @@ class CharacterController extends Controller
             if(!$this->character) abort(404);
 
             $this->character->updateOwner();
+            $this->character->updateCoOwner();
             return $next($request);
         });
     }
