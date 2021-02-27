@@ -122,6 +122,7 @@ class CharacterManager extends Service
             // CO OWNER NOTIF ///////////////////////////
             $courl = null;
             $corecipientId = null;
+            $corecipient = null;
             if(isset($data['coowner_id']) && $data['coowner_id']) $corecipient = User::find($data['coowner_id']);
             elseif(isset($data['coowner_url']) && $data['coowner_url']) $corecipient = checkAlias($data['coowner_url']);
     
