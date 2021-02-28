@@ -125,7 +125,15 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * Get the user's characters.
+     * Get only the user's characters.
+     */
+    public function primaryCharacters()
+    {
+        return $this->hasMany('App\Models\Character\Character')->where('is_myo_slot', 0)->orderBy('sort', 'DESC');
+    }
+
+    /**
+     * Get the user's characters (including co-owned).
      */
     public function characters()
     {

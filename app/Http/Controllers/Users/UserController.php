@@ -66,6 +66,8 @@ class UserController extends Controller
     {
         $characters = $this->user->characters();
         if(!Auth::check() || !(Auth::check() && Auth::user()->hasPower('manage_characters'))) $characters->visible();
+
+        $characters->orderByRaw('user_id = ? desc',[$this->user->id])->orderBy('sort', 'DESC')->get();
         
         return view('user.profile', [
             'user' => $this->user,
@@ -106,7 +108,7 @@ class UserController extends Controller
 
         return view('user.characters', [
             'user' => $this->user,
-            'characters' => $query->orderBy('sort', 'DESC')->get(),
+            'characters' => $query->orderByRaw('user_id = ? desc',[$this->user->id])->orderBy('sort', 'DESC')->get(),
             'sublists' => Sublist::orderBy('sort', 'DESC')->get()
         ]);
     }
@@ -137,7 +139,7 @@ class UserController extends Controller
 
         return view('user.sublist', [
             'user' => $this->user,
-            'characters' => $query->orderBy('sort', 'DESC')->get(),
+            'characters' => $query->orderByRaw('user_id = ? desc',[$this->user->id])->orderBy('sort', 'DESC')->get(),
             'sublist' => $sublist,
             'sublists' => Sublist::orderBy('sort', 'DESC')->get()
         ]);
