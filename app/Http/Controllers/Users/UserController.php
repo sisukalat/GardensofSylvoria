@@ -121,8 +121,11 @@ class UserController extends Controller
      */
     public function getUserSublist($name, $key)
     {
-        $first = Character::myo(0)->where('coowner_id', $this->user->id);
-        $query = Character::myo(0)->where('user_id', $this->user->id)->union($first);
+        $user = $this->user;
+        $query = Character::myo(0)->where(function($query) use ($user) {
+            $query->where('user_id', $user->id)
+            ->orWhere('coowner_id', $user->id);
+        });
         $imageQuery = CharacterImage::images(Auth::check() ? Auth::user() : null)->with('features')->with('rarity')->with('species')->with('features');
 
         $sublist = Sublist::where('key', $key)->first();
@@ -138,8 +141,8 @@ class UserController extends Controller
         if(!Auth::check() || !(Auth::check() && Auth::user()->hasPower('manage_characters'))) $query->visible();
 
         return view('user.sublist', [
-            'user' => $this->user,
-            'characters' => $query->orderByRaw('user_id = ? desc',[$this->user->id])->orderBy('sort', 'DESC')->get(),
+            'user' => $user,
+            'characters' => $query->orderByRaw('user_id = ? desc',[$user->id])->orderBy('sort', 'DESC')->get(),
             'sublist' => $sublist,
             'sublists' => Sublist::orderBy('sort', 'DESC')->get()
         ]);
@@ -318,13 +321,13 @@ class UserController extends Controller
     public function getUserOwnCharacterFavorites($name)
     {
         $user = $this->user;
-        $userCharacters = $user->characters()->pluck('id')->toArray();
+        $userCharacters = $user->primaryCharacters()->pluck('id')->toArray();
         $userFavorites = $user->galleryFavorites()->pluck('gallery_submission_id')->toArray();
 
         return view('user.favorites', [
             'user' => $this->user,
             'characters' => true,
-            'favorites' => $this->user->characters->count() ? GallerySubmission::whereIn('id', $userFavorites)->whereIn('id', GalleryCharacter::whereIn('character_id', $userCharacters)->pluck('gallery_submission_id')->toArray())->visible(Auth::check() ? Auth::user() : null)->accepted()->orderBy('created_at', 'DESC')->paginate(20) : null,
+            'favorites' => $this->user->primaryCharacters->count() ? GallerySubmission::whereIn('id', $userFavorites)->whereIn('id', GalleryCharacter::whereIn('character_id', $userCharacters)->pluck('gallery_submission_id')->toArray())->visible(Auth::check() ? Auth::user() : null)->accepted()->orderBy('created_at', 'DESC')->paginate(20) : null,
             'sublists' => Sublist::orderBy('sort', 'DESC')->get()
         ]);
     }
