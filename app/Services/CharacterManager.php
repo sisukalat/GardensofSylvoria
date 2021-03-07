@@ -104,6 +104,7 @@ class CharacterManager extends Service
                 if(!$subtype || $subtype->species_id != $data['species_id']) throw new \Exception('Selected subtype invalid or does not match species.');
             }
             else $data['subtype_id'] = null;
+            if($isMyo) { $data['coowner_id'] = null; $data['coowner_url'] = null; }
 
             // Get owner info
             $url = null;
