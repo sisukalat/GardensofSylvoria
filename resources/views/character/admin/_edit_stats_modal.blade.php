@@ -34,7 +34,7 @@
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                {!! Form::label('Owner URL (Optional)') !!}
+                {!! Form::label('Co-Owner URL (Optional)') !!}
                 {!! Form::text('coowner_url', $character->coowner_url, ['class' => 'form-control']) !!}
             </div>
         </div>

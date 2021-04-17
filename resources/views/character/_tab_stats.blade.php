@@ -2,7 +2,7 @@
     <div class="col-lg-3 col-4"><h5>Owner</h5></div>
     <div class="col-lg-9 col-8">{!! $character->displayOwner !!}</div>
 </div>
-@if(isset($character->coowner_id) || isset($character->coowner_id))
+@if(isset($character->coowner_id) || isset($character->coowner_url))
     <div class="row">
         <div class="col-lg-3 col-4"><h5>Co-Owner</h5></div>
         <div class="col-lg-3 col-4">{!! $character->displayCoOwner !!}</div>
