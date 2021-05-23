@@ -103,7 +103,7 @@ class AddSiteSettings extends Command
 
         $this->addSiteSetting('group_currency', 1, 'ID of the group currency to award from gallery submissions (if enabled).');
 
-        $this->addSiteSetting('featured_character', 0, 'ID of the currently featured character.');
+        $this->addSiteSetting('featured_character', 1, 'ID of the currently featured character.');
 
         $this->line("\nSite settings up to date!");
 

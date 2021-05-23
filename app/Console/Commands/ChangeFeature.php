@@ -42,15 +42,22 @@ class ChangeFeature extends Command
     public function handle()
     {
         $characterCount = Character::count();
-        $setting = DB::table('site_settings')->where('key', 'featured_character')->get();
+        $setting = Settings::get('featured_character');
         //
         if($characterCount && $setting) {
             $id = mt_rand(1, $characterCount);
             //
-            if($id == $setting->value) {
-                $id = $id + mt_rand(-5, 5);
+            if($id == $setting && $id != 1) {
+                if($id <= 5) {
+                    $id = $id + mt_rand(-2, 2);
+                }
+                else {
+                    $id = $id + mt_rand(-5, 5);
+                }
             }
-            Log::debug('test');
+            //
+            if($id < 0) $id = abs($id);
+
             DB::table('site_settings')->where('key', 'featured_character')->update(['value' => $id]);
         }
     }
