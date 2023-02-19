@@ -50,6 +50,8 @@ class ShopManager extends Service
             // Check if the user can only buy a limited number of this item, and if it does, check that the user hasn't hit the limit
             if($shopStock->purchase_limit && $this->checkPurchaseLimitReached($shopStock, $user)) throw new \Exception("You have already purchased the maximum amount of this item you can buy.");
 
+            if($shop->visible_only == 1) throw new \Exception('You are not allowed to buy items from this shop at this time.');
+
             $total_cost = $shopStock->cost * $quantity;
 
             $character = null;
