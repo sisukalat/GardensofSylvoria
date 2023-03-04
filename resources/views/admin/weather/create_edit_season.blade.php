@@ -37,7 +37,7 @@
 </div>
 
 <div class="form-group">
-    {!! Form::label('Summary (Optional)') !!} {!! add_help('This is a short blurb that shows up on the consolidated seasons page. HTML cannot be used here.') !!}
+    {!! Form::label('Summary (Optional)') !!} {!! add_help('A short blurb that shows up on the season page and widget. HTML cannot be used here.') !!}
     {!! Form::text('summary', $season->summary, ['class' => 'form-control', 'maxLength' => 250]) !!}
 </div>
 
@@ -49,12 +49,6 @@
 <div class="form-group">
     {!! Form::checkbox('is_visible', 1, $season->id ? $season->is_visible : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
     {!! Form::label('is_visible', 'Is Active', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Seasons that are not active will be hidden from the season list.') !!}
-</div>
-
-
-<div class="form-group">
-    {!! Form::label('Disclose Rates') !!} {!! add_help('This determines if users can see the potential weathers of this season on the encyclopedia page.') !!}
-    {!! Form::select('disclose_rates', ['0' => '0: This season\'s weathers are hidden.', '1' => '1: Users can see both weather and roll rates.', '2' => '2: Users can see weathers, but not roll rates.'],$season->disclose_rates, ['class' => 'form-control']) !!}
 </div>
 
 <h3>Table</h3>
@@ -130,7 +124,7 @@
     <h3>Preview</h3>
     <div class="card mb-3">
         <div class="card-body">
-        @include('world._season_entry', ['name' => $season->name, 'loot' => $season->loot])        
+        @include('world._season_entry', ['name' => $season->name])        
     </div>
     </div>
 @endif

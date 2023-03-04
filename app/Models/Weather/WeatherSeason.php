@@ -14,7 +14,7 @@ class WeatherSeason extends Model
      */
     protected $fillable = [
         'name', 'summary', 'description',
-        'parsed_description', 'is_visible', 'sort', 'has_image', 'disclose_rates'
+        'parsed_description', 'is_visible', 'sort', 'has_image'
     ];
 
     /**
@@ -149,7 +149,7 @@ class WeatherSeason extends Model
      * @return \Illuminate\Support\Collection
      */
     public function roll($quantity = 1)
-    {
+    { 
         $rewards = createAssetsArray();
 
         $loot = $this->loot;
@@ -182,6 +182,7 @@ class WeatherSeason extends Model
         }
         return $rewards;
     }
+    
 
     /**
      * Gets the file directory containing the model's image.

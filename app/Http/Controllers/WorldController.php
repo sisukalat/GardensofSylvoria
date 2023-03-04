@@ -447,4 +447,15 @@ class WorldController extends Controller
             'weathers' => $query->orderBy('sort', 'DESC')->paginate(20)->appends($request->query()),
         ]);
     }
+
+     /**
+     * Shows the forecast page.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function getForecast(Request $request)
+    {
+        return view('world.forecast');
+    }
 }

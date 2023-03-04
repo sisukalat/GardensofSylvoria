@@ -42,7 +42,7 @@
 </div>
 
 <div class="form-group">
-    {!! Form::label('Summary (Optional)') !!} {!! add_help('This is a short blurb that shows up on the weather widget. HTML cannot be used here.') !!}
+    {!! Form::label('Summary (Optional)') !!} {!! add_help('A short blurb that shows up on the weather page and widget. HTML cannot be used here.') !!}
     {!! Form::text('summary', $weather->summary, ['class' => 'form-control', 'maxLength' => 250]) !!}
 </div>
 

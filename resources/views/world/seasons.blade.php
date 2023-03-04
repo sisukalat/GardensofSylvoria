@@ -3,7 +3,7 @@
 @section('title') Seasons @endsection
 
 @section('content')
-{!! breadcrumbs(['World' => 'world', 'Loot' => 'world/loot-seasons']) !!}
+{!! breadcrumbs(['World' => 'world', 'Weather' => 'world/weathers', 'Seasons' => 'world/seasons']) !!}
 <h1>Seasons</h1>
 
 <div>
@@ -33,7 +33,7 @@
 @foreach($seasons as $season)
     <div class="card mb-3">
         <div class="card-body">
-        @include('world._season_entry', ['name' => $season->name, 'loot' => $season->loot])
+        @include('world._season_entry', ['name' => $season->name])
         </div>
     </div>
 @endforeach
