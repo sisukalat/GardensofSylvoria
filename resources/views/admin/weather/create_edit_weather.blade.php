@@ -20,6 +20,10 @@
     {!! Form::text('name', $weather->name, ['class' => 'form-control']) !!}
 </div>
 
+@if($weather->has_image)
+        <img src="{{$weather->imageUrl }}" class="img-fluid mr-2 mb-2" style="height: 10em;" />
+        <br>
+    @endif
 <div class="form-group">
     {!! Form::label('World Page Image (Optional)') !!} {!! add_help('This image is used only on the world information pages.') !!}
     <div>{!! Form::file('image') !!}</div>

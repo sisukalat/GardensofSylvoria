@@ -2,8 +2,7 @@
 <table class="table table-sm table-striped">
     <thead>
         <th>#</th>
-        <th>Reward</th>
-        <th>Quantity</th>
+        <th>Weather Rolled</th>
     </thead>
     <tbody>
         <?php $count = 1; ?>
@@ -21,4 +20,3 @@
         @endforeach
     </tbody>
 </table>
-<p>Note: "None" results are not shown in this table.</p>

@@ -107,6 +107,10 @@ class AddSiteSettings extends Command
 
         $this->addSiteSetting('site_weather', 1, 'ID of the weather the site is currently experiencing.');
 
+        $this->addSiteSetting('weather_cycle', 1, '1 = Daily, 2 = Weekly, 3 = Monthly');
+
+        $this->addSiteSetting('season_cycle', 1, '1 = Daily, 2 = Weekly, 3 = Monthly');
+
         $this->line("\nSite settings up to date!");
 
     }

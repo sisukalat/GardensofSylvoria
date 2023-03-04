@@ -70,7 +70,7 @@ class WeatherTable extends Model
      */
     public function getDisplayNameAttribute()
     {
-            return '<a href="'.$this->reward->url.'">'.$this->reward->name.'</a>';
+        return '<a href="'.$this->reward->url.'">'.$this->reward->name.'</a>';
     }
 
     /**

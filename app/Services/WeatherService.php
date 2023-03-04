@@ -34,7 +34,7 @@ class WeatherService extends Service
 
         try {
 
-            $season = WeatherSeason::create(Arr::only($data, ['name', 'description', 'image', 'remove_image', 'is_visible', 'summary', 'disclose_rates',]));
+            $season = WeatherSeason::create($data);
 
             
             $image = null;
@@ -45,7 +45,7 @@ class WeatherService extends Service
             }
             else $data['has_image'] = 0;
 
-            $this->populateSeason($season, Arr::only($data, ['rewardable_id','weight','rewardable_type']));
+            $this->populateSeason($season, Arr::only($data, ['weather_id','weight','rewardable_type']));
 
             if ($image) $this->handleImage($image, $season->imagePath, $season->imageFileName);
 
@@ -75,10 +75,10 @@ class WeatherService extends Service
                 $image = $data['image'];
                 unset($data['image']);
             }
-            else $data['has_image'] = 0;
 
+            isset($data['is_visible']) && $data['is_visible'] ? $data['is_visible'] : $data['is_visible'] = 0;
 
-            $season->update(Arr::only($data, ['name', 'description', 'image', 'remove_image', 'is_visible', 'summary', 'disclose_rates',]));
+            $season->update($data);
 
             if ($image) $this->handleImage($image, $season->imagePath, $season->imageFileName);
 
@@ -92,7 +92,7 @@ class WeatherService extends Service
                 unset($data['remove_image']);
             }
 
-            $this->populateSeason($season, Arr::only($data, ['rewardable_id','weight','rewardable_type']));
+            $this->populateSeason($season, Arr::only($data, ['weather_id','weight','rewardable_type']));
 
             return $this->commitReturn($season);
         } catch(\Exception $e) {
@@ -116,7 +116,7 @@ class WeatherService extends Service
         {
             WeatherTable::create([
                 'weather_season_id'   => $season->id,
-                'weather_id'   => isset($data['rewardable_id'][$key]) ? $data['rewardable_id'][$key] : 1,
+                'weather_id'   => isset($data['weather_id'][$key]) ? $data['weather_id'][$key] : 1,
                 'weight'          => $data['weight'][$key],
             ]);
         }
@@ -204,7 +204,7 @@ class WeatherService extends Service
 
             isset($data['is_visible']) && $data['is_visible'] ? $data['is_visible'] : $data['is_visible'] = 0;
 
-            $weather->update(Arr::only($data, ['name', 'description', 'image', 'remove_image', 'is_visible', 'summary']));
+            $weather->update($data);
 
             if ($image) $this->handleImage($image, $weather->imagePath, $weather->imageFileName);
 
@@ -258,7 +258,7 @@ class WeatherService extends Service
      * @param  \App\Models\Weather\Weather|null  $weather
      * @return array
      */
-    private function populateWeatherData($data, $category = null)
+    private function populateWeatherData($data, $weather = null)
     {
         if(isset($data['description']) && $data['description']) $data['parsed_description'] = parse($data['description']);
 
@@ -271,6 +271,33 @@ class WeatherService extends Service
             {
                 $data['has_image'] = 0;
                 $this->deleteImage($weather->imagePath, $weather->imageFileName);
+            }
+            unset($data['remove_image']);
+        }
+
+        return $data;
+    }
+
+    /**
+     * Handle season data.
+     *
+     * @param  array                               $data
+     * @param  \App\Models\Weather\WeatherSeason|null  $season
+     * @return array
+     */
+    private function populateData($data, $season = null)
+    {
+        if(isset($data['description']) && $data['description']) $data['parsed_description'] = parse($data['description']);
+
+        isset($data['is_visible']) && $data['is_visible'] ? $data['is_visible'] : $data['is_visible'] = 0;
+
+       
+        if(isset($data['remove_image']))
+        {
+            if($season && $season->has_image && $data['remove_image'])
+            {
+                $data['has_image'] = 0;
+                $this->deleteImage($season->imagePath, $season->imageFileName);
             }
             unset($data['remove_image']);
         }

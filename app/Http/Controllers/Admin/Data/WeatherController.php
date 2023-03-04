@@ -78,7 +78,7 @@ class WeatherController extends Controller
     { 
         $id ? $request->validate(WeatherSeason::$updateRules) : $request->validate(WeatherSeason::$createRules);
         $data = $request->only([
-            'name', 'description', 'image', 'remove_image', 'is_visible', 'summary', 'weather_id', 'weight','rewardable_type'
+            'name', 'description', 'image', 'remove_image', 'is_visible', 'summary', 'weather_id', 'weight','rewardable_type','disclose_rates'
         ]);
         if($id && $service->updateSeason(WeatherSeason::find($id), $data, Auth::user())) {
             flash('Weather updated successfully.')->success();
@@ -153,7 +153,7 @@ class WeatherController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function getRollSeason(Request $request, WeatherService $service, $id)
-    {
+    { 
         $table = WeatherSeason::find($id);
         if(!$table) abort(404);
 

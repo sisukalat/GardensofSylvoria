@@ -3,6 +3,11 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Settings;
+use DB;
+use App\Models\Weather\WeatherSeason;
+use App\Models\Weather\Weather;
+use App\Models\Weather\WeatherTable;
 
 class cycle_site_weather extends Command
 {
@@ -37,28 +42,17 @@ class cycle_site_weather extends Command
      */
     public function handle()
     {
-        $weather = \App\Models\Weather\Weather::where('is_limited_stock', 1)->where('restock', 1)->get();
-        foreach($stocks as $stock) {
-            if($stock->restock_interval == 1) {
-                $stock->quantity = $stock->range ? mt_rand(1, $stock->restock_quantity) : $stock->restock_quantity;
-                $stock->save();
-            } elseif($stock->restock_interval == 2) {
-                // check if it's start of week
-                $now = Carbon::now();
-                $day = $now->dayOfWeek;
-                if($day == 1) {
-                    $stock->quantity = $stock->range ? mt_rand(1, $stock->restock_quantity) : $stock->restock_quantity;
-                    $stock->save();
-                }
-            } elseif($stock->restock_interval == 3) {
-                // check if it's start of month
-                $now = Carbon::now();
-                $day = $now->day;
-                if($day == 1) {
-                    $stock->quantity = $stock->range ? mt_rand(1, $stock->restock_quantity) : $stock->restock_quantity;
-                    $stock->save();
-                }
-            }
+        $currentweather = Weather::where('id', Settings::get('site_weather'))->first();
+        $currentseason = WeatherSeason::where('id', Settings::get('site_season'))->first();
+
+        if(Settings::get('site_weather') == 1) {
+            $results = [];
+            for ($i = 0; $i < 1; $i++)
+                $results[] = $currentseason->roll();
+                $neweath = $results->id;
+            DB::table('site_settings')->where('key', 'site_weather')->update(['value' => $neweath]);
         }
+        
+
     }
 }

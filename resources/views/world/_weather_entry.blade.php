@@ -1,11 +1,12 @@
 <div class="row world-entry">
-    @if($imageUrl)
-        <div class="col-md-3 world-entry-image"><a href="{{ $imageUrl }}" data-lightbox="entry" data-title="{{ $name }}"><img src="{{ $imageUrl }}" class="world-entry-image" alt="{{ $name }}" /></a></div>
+    @if($weather->imageUrl)
+        <div class="col-md-3 world-entry-image"><a href="{{ $weather->imageUrl }}" data-lightbox="entry" data-title="{{ $weather->name }}"><img src="{{ $weather->imageUrl }}" class="world-entry-image" alt="{{ $weather->name }}" /></a></div>
     @endif
-    <div class="{{ $imageUrl ? 'col-md-9' : 'col-12' }}">
-        <h3>{!! $name !!} </h3>
+    <div class="{{ $weather->imageUrl ? 'col-md-9' : 'col-12' }}">
+        <h3>{!! $weather->displayName !!} </h3>
+        <div class="text-muted"><i>" {!! $weather->summary !!} " </i></div>
         <div class="world-entry-text">
-            {!! $description !!}
+        {!! $weather->description !!}
         </div>
     </div>
 </div>

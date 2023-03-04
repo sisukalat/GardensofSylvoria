@@ -9,3 +9,7 @@
         @include('pages._logged_out')
     @endif
 @endsection
+
+@section('sidebar')
+    @include('widgets._current_weather')
+@endsection

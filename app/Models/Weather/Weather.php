@@ -48,14 +48,24 @@ class Weather extends Model
 
     **********************************************************************************************/
 
-  
+   /**
+     * Scope a query to show only visible features.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeVisible($query, $withHidden = 0)
+    {
+        if($withHidden) return $query;
+        return $query->where('is_visible', 1);
+    }
 
     /**********************************************************************************************
 
         ACCESSORS
 
     **********************************************************************************************/
-/**
+    /**
      * Displays the model's name, linked to its encyclopedia page.
      *
      * @return string
@@ -123,6 +133,6 @@ class Weather extends Model
     public function getImageUrlAttribute()
     {
         if (!$this->has_image) return null;
-        return asset($this->imageDirectory . '/' . $this->categoryImageFileName);
+        return asset($this->imageDirectory . '/' . $this->imageFileName);
     }
 }

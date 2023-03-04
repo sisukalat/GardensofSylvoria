@@ -1,6 +1,11 @@
 <div class="row world-entry">
-    <div class="col-12">
-        <h3>{!! $name !!}</h3>
+@if($season->imageUrl)
+        <div class="col-md-3 world-entry-image"><a href="{{ $season->imageUrl }}" data-lightbox="entry" data-title="{{ $name }}"><img src="{{ $season->imageUrl }}" class="world-entry-image" alt="{{ $season->name }}" /></a></div>
+    @endif
+    <div class="{{ $season->imageUrl ? 'col-md-9' : 'col-12' }}">
+        <h3>{!! $season->displayName !!}</h3>
+        <div class="text-muted"><i>" {!! $season->summary !!} " </i></div>
+        {!! $season->description !!}
         @if($season->disclose_rates == 2)
             <p>Looks like we have no data to predict rates this season!</p>
             <p><i>(This season's rates are hidden!)</i></p>

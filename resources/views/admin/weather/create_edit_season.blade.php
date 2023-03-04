@@ -11,7 +11,7 @@
     @endif
 </h1>
 
-{!! Form::open(['url' => $season->id ? 'admin/weather/seasons/edit/'.$season->id : 'admin/weather/seasons/create']) !!}
+{!! Form::open(['url' => $season->id ? 'admin/weather/seasons/edit/'.$season->id : 'admin/weather/seasons/create', 'files' => true]) !!}
 
 <h3>Basic Information</h3>
 
@@ -20,6 +20,10 @@
     {!! Form::text('name', $season->name, ['class' => 'form-control']) !!}
 </div>
 
+@if($season->has_image)
+        <img src="{{$season->imageUrl }}" class="img-fluid mr-2 mb-2" style="height: 10em;" />
+        <br>
+    @endif
 <div class="form-group">
     {!! Form::label('World Page Image (Optional)') !!} {!! add_help('This image is used only on the world information pages.') !!}
     <div>{!! Form::file('image') !!}</div>
@@ -43,8 +47,8 @@
 </div>
 
 <div class="form-group">
-    {!! Form::checkbox('is_active', 1, $season->id ? $season->is_active : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
-    {!! Form::label('is_active', 'Is Active', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Seasons that are not active will be hidden from the season list.') !!}
+    {!! Form::checkbox('is_visible', 1, $season->id ? $season->is_visible : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+    {!! Form::label('is_visible', 'Is Active', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Seasons that are not active will be hidden from the season list.') !!}
 </div>
 
 
@@ -76,7 +80,7 @@
                     <td>{!! Form::select('rewardable_type[]', ['Weather' => 'Weather'], $loot->rewardable_type, ['class' => 'form-control reward-type', 'placeholder' => 'Select Reward Type']) !!}</td>
                     <td class="loot-row-select">
                         @if($loot->rewardable_type == 'Weather')
-                            {!! Form::select('rewardable_id[]', $weathers, $loot->rewardable_id, ['class' => 'form-control weather-select selectize', 'placeholder' => 'Select Weather']) !!}
+                            {!! Form::select('weather_id[]', $weathers, $loot->weather_id, ['class' => 'form-control weather-select selectize', 'placeholder' => 'Select Weather']) !!}
                         @endif
                     </td>
                     <td class="loot-row-weight">{!! Form::text('weight[]', $loot->weight, ['class' => 'form-control loot-weight']) !!}</td>
@@ -106,7 +110,7 @@
             </tr>
         </tbody>
     </table>
-    {!! Form::select('rewardable_id[]', $weathers, null, ['class' => 'form-control weather-select', 'placeholder' => 'Select Weather']) !!}
+    {!! Form::select('weather_id[]', $weathers, null, ['class' => 'form-control weather-select', 'placeholder' => 'Select Weather']) !!}
 </div>
 
 @if($season->id)
@@ -119,6 +123,15 @@
     </div>
     <div class="text-right">
         <a href="#" class="btn btn-primary" id="testRoll">Test Roll</a>
+    </div>
+@endif
+
+@if($season->id)
+    <h3>Preview</h3>
+    <div class="card mb-3">
+        <div class="card-body">
+        @include('world._season_entry', ['name' => $season->name, 'loot' => $season->loot])        
+    </div>
     </div>
 @endif
 

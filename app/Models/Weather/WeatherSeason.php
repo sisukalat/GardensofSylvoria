@@ -14,7 +14,7 @@ class WeatherSeason extends Model
      */
     protected $fillable = [
         'name', 'summary', 'description',
-        'parsed_description', 'is_visible', 'sort', 'has_image',
+        'parsed_description', 'is_visible', 'sort', 'has_image', 'disclose_rates'
     ];
 
     /**
@@ -91,6 +91,18 @@ class WeatherSeason extends Model
     public function scopeSortOldest($query)
     {
         return $query->orderBy('id');
+    }
+
+     /**
+     * Scope a query to show only visible features.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeVisible($query, $withHidden = 0)
+    {
+        if($withHidden) return $query;
+        return $query->where('is_visible', 1);
     }
 
     /**********************************************************************************************
@@ -209,6 +221,6 @@ class WeatherSeason extends Model
     public function getImageUrlAttribute()
     {
         if (!$this->has_image) return null;
-        return asset($this->imageDirectory . '/' . $this->categoryImageFileName);
+        return asset($this->imageDirectory . '/' . $this->imageFileName);
     }
 }
