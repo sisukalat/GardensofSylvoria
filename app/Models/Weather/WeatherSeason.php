@@ -14,7 +14,7 @@ class WeatherSeason extends Model
      */
     protected $fillable = [
         'name', 'summary', 'description',
-        'parsed_description', 'is_visible', 'sort', 'has_image'
+        'parsed_description', 'is_visible', 'sort', 'has_image', 'cycle_at', 'end_at'
     ];
 
     /**

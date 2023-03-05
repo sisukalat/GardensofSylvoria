@@ -45,7 +45,7 @@ class cycle_site_weather extends Command
         $currentweather = Weather::where('id', Settings::get('site_weather'))->first();
         $currentseason = WeatherSeason::where('id', Settings::get('site_season'))->first();
 
-        //now change the weather
+        //change the weather
         if(Settings::get('site_weather_cycle') == 0) {
             //no reset setting
             $this->info('Not set to cycle weather currently. Adjust the settings if this is an error.');

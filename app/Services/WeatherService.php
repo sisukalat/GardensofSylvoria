@@ -86,8 +86,8 @@ class WeatherService extends Service
             {
                 if($season && $season->has_image && $data['remove_image'])
                 {
-                    $data['has_image'] = 0;
-                    $this->deleteImage($season->imagePath, $season->imageFileName);
+                    $season->has_image = 0;
+                    $season->save();
                 }
                 unset($data['remove_image']);
             }
@@ -198,7 +198,6 @@ class WeatherService extends Service
                 $image = $data['image'];
                 unset($data['image']);
             }
-            else $data['has_image'] = 0;
 
             if(isset($data['description']) && $data['description']) $data['parsed_description'] = parse($data['description']);
 
@@ -209,14 +208,16 @@ class WeatherService extends Service
             if ($image) $this->handleImage($image, $weather->imagePath, $weather->imageFileName);
 
             if(isset($data['remove_image']))
-            {
-                if($weather && $weather->has_image && $data['remove_image'])
                 {
-                    $data['has_image'] = 0;
-                    $this->deleteImage($weather->imagePath, $weather->imageFileName);
+                    if($weather && $weather->has_image && $data['remove_image'])
+                    {
+                        $data['has_image'] = 0;
+                        $this->deleteImage($weather->imagePath, $weather->imageFileName);
+                    }
+                    unset($data['remove_image']);
+                    $weather->has_image = 0;
+                    $weather->save();
                 }
-                unset($data['remove_image']);
-            }
 
             return $this->commitReturn($weather);
         } catch(\Exception $e) {

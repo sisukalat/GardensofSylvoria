@@ -37,9 +37,10 @@ class AddWeatherTables extends Migration
             $table->string('summary', 256)->nullable()->default(null);
             $table->text('description')->nullable()->default(null);
             $table->text('parsed_description')->nullable()->default(null);
-            $table->unsignedInteger('cycle_at')->default(2);
+            $table->timestamps();
+            $table->timestamp('cycle_at')->nullable()->default(null);
+            $table->timestamp('end_at')->nullable()->default(null);
             $table->boolean('is_visible')->default(true);
-            $table->smallInteger('disclose_rates')->default(0);
             $table->integer('sort')->unsigned()->default(0);
             $table->boolean('has_image')->default(0);
         });
@@ -48,12 +49,10 @@ class AddWeatherTables extends Migration
         Schema::create('weather_table', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-
             $table->integer('weather_season_id')->unsigned();
             $table->integer('weather_id')->unsigned();
-            
-            $table->integer('weight')->unsigned();
-            
+            $table->integer('weight')->unsigned();  
+            $table->enum('rewardable_type', ['Weather'])->default('Weather');
             $table->foreign('weather_season_id')->references('id')->on('weather_seasons');
         });
     }

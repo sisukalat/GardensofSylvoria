@@ -109,8 +109,6 @@ class AddSiteSettings extends Command
 
         $this->addSiteSetting('site_weather_cycle', 0, '0 = Do not cycle, 1 = Daily, 2 = Weekly, 3 = Monthly');
 
-        $this->addSiteSetting('site_season_cycle', 0, '0 = Do not cycle, 1 = Weekly, 2 = Monthly');
-
         $this->line("\nSite settings up to date!");
 
     }

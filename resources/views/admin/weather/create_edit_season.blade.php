@@ -36,6 +36,26 @@
     @endif
 </div>
 
+        <div class="form-group">
+            {!! Form::checkbox('is_visible', 1, $season->id ? $season->is_visible : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+            {!! Form::label('is_visible', 'Is Active', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Seasons that are not active will be hidden from the season list.') !!}
+        </div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            {!! Form::label('cycle_at', 'Start Time (Optional)') !!} {!! add_help('Prompts cannot be submitted to the queue before the starting time.') !!}
+            {!! Form::text('cycle_at', $season->cycle_at, ['class' => 'form-control datepicker']) !!}
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            {!! Form::label('end_at', 'End Time (Optional)') !!} {!! add_help('Prompts cannot be submitted to the queue after the ending time.') !!}
+            {!! Form::text('end_at', $season->end_at, ['class' => 'form-control datepicker']) !!}
+        </div>
+    </div>
+</div>
+
 <div class="form-group">
     {!! Form::label('Summary (Optional)') !!} {!! add_help('A short blurb that shows up on the season page and widget. HTML cannot be used here.') !!}
     {!! Form::text('summary', $season->summary, ['class' => 'form-control', 'maxLength' => 250]) !!}
@@ -44,11 +64,6 @@
 <div class="form-group">
     {!! Form::label('Description (Optional)') !!} {!! add_help('This is a full description of the season that shows up on the full season page.') !!}
     {!! Form::textarea('description', $season->description, ['class' => 'form-control wysiwyg']) !!}
-</div>
-
-<div class="form-group">
-    {!! Form::checkbox('is_visible', 1, $season->id ? $season->is_visible : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
-    {!! Form::label('is_visible', 'Is Active', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Seasons that are not active will be hidden from the season list.') !!}
 </div>
 
 <h3>Table</h3>
@@ -138,6 +153,11 @@ $( document ).ready(function() {
     var $lootSeason  = $('#lootSeasonBody');
     var $lootRow = $('#lootRow').find('.loot-row');
     var $weatherSelect = $('#lootRowData').find('.weather-select');
+
+    $( ".datepicker" ).datetimepicker({
+        dateFormat: "yy-mm-dd",
+        timeFormat: 'HH:mm:ss',
+    });
 
     refreshChances();
     $('#lootSeasonBody .selectize').selectize();

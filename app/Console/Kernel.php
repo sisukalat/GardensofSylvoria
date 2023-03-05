@@ -32,6 +32,8 @@ class Kernel extends ConsoleKernel
                 ->everyMinute();
         $schedule->command('cycle-site-weather')
                 ->daily();
+        $schedule->command('change-site-season')
+                ->everyMinute();
 
     }
 
