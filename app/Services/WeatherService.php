@@ -45,7 +45,7 @@ class WeatherService extends Service
             }
             else $data['has_image'] = 0;
 
-            $this->populateSeason($season, Arr::only($data, ['weather_id','weight','rewardable_type']));
+            $this->populateSeason($season, Arr::only($data, ['weather_id', 'weight']));
 
             if ($image) $this->handleImage($image, $season->imagePath, $season->imageFileName);
 
@@ -112,11 +112,11 @@ class WeatherService extends Service
         // Clear the old weather...
         $season->loot()->delete();
 
-        foreach($data['rewardable_type'] as $key => $type)
+        foreach ($data['weather_id'] as $key => $type)
         {
             WeatherTable::create([
                 'weather_season_id'   => $season->id,
-                'weather_id'   => isset($data['weather_id'][$key]) ? $data['weather_id'][$key] : 1,
+                'weather_id'   => isset($type) ? $type : 1,
                 'weight'          => $data['weight'][$key],
             ]);
         }
