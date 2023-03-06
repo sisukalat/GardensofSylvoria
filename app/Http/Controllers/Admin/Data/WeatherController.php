@@ -77,8 +77,7 @@ class WeatherController extends Controller
     public function postCreateEditSeason(Request $request, WeatherService $service, $id = null)
     { 
         $id ? $request->validate(WeatherSeason::$updateRules) : $request->validate(WeatherSeason::$createRules);
-        $data = $request->only([
-            'name', 'description', 'image', 'remove_image', 'is_visible', 'summary', 'weather_id', 'weight','rewardable_type','cycle_at', 'end_at'
+        $data = $request->only(['name', 'description', 'image', 'remove_image', 'is_visible', 'summary', 'weather_id', 'weight', 'cycle_at', 'end_at'
         ]);
         if($id && $service->updateSeason(WeatherSeason::find($id), $data, Auth::user())) {
             flash('Weather updated successfully.')->success();

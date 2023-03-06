@@ -75,10 +75,9 @@
 <table class="table table-sm" id="lootSeason">
     <thead>
         <tr>
-            <th width="25%">Loot Type</th>
-            <th width="35%">Weather</th>
-            <th width="10%">Weight {!! add_help('A higher weight means a reward is more likely to be rolled. Weights have to be integers above 0 (round positive number, no decimals) and do not have to add up to be a particular number.') !!}</th>
-            <th width="10%">Chance</th>
+            <th width="40%">Weather</th>
+            <th width="30%">Weight {!! add_help('A higher weight means a reward is more likely to be rolled. Weights have to be integers above 0 (round positive number, no decimals) and do not have to add up to be a particular number.') !!}</th>
+            <th width="20%">Chance</th>
             <th width="10%"></th>
         </tr>
     </thead>
@@ -86,11 +85,8 @@
         @if($season->id)
             @foreach($season->loot as $loot)
                 <tr class="loot-row">
-                    <td>{!! Form::select('rewardable_type[]', ['Weather' => 'Weather'], $loot->rewardable_type, ['class' => 'form-control reward-type', 'placeholder' => 'Select Reward Type']) !!}</td>
                     <td class="loot-row-select">
-                        @if($loot->rewardable_type == 'Weather')
-                            {!! Form::select('weather_id[]', $weathers, $loot->weather_id, ['class' => 'form-control weather-select selectize', 'placeholder' => 'Select Weather']) !!}
-                        @endif
+                        {!! Form::select('weather_id[]', $weathers, $loot->weather_id, ['class' => 'form-control weather-select selectize', 'placeholder' => 'Select Weather']) !!}
                     </td>
                     <td class="loot-row-weight">{!! Form::text('weight[]', $loot->weight, ['class' => 'form-control loot-weight']) !!}</td>
                     <td class="loot-row-chance"></td>
@@ -111,15 +107,13 @@
     <table class="table table-sm">
         <tbody id="lootRow">
             <tr class="loot-row">
-                <td>{!! Form::select('rewardable_type[]', ['Weather' => 'Weather'], null, ['class' => 'form-control reward-type', 'placeholder' => 'Select Reward Type']) !!}</td>
-                <td class="loot-row-select"></td>
+                <td class="loot-row-select">{!! Form::select('weather_id[]', $weathers, null, ['class' => 'form-control weather-select', 'placeholder' => 'Select Weather']) !!}</td>
                 <td class="loot-row-weight">{!! Form::text('weight[]', 1, ['class' => 'form-control loot-weight']) !!}</td>
                 <td class="loot-row-chance"></td>
                 <td class="text-right"><a href="#" class="btn btn-danger remove-loot-button">Remove</a></td>
             </tr>
         </tbody>
     </table>
-    {!! Form::select('weather_id[]', $weathers, null, ['class' => 'form-control weather-select', 'placeholder' => 'Select Weather']) !!}
 </div>
 
 @if($season->id)
@@ -177,7 +171,6 @@ $( document ).ready(function() {
         e.preventDefault();
         var $clone = $lootRow.clone();
         $lootSeason.append($clone);
-        attachRewardTypeListener($clone.find('.reward-type'));
         attachRemoveListener($clone.find('.remove-loot-button'));
         attachWeightListener($clone.find('.loot-weight'));
         refreshChances();
@@ -193,20 +186,6 @@ $( document ).ready(function() {
         $cell.html('');
         $cell.append($clone);
     });
-
-    function attachRewardTypeListener(node) {
-        node.on('change', function(e) {
-            var val = $(this).val();
-            var $cell = $(this).parent().parent().find('.loot-row-select');
-
-            var $clone = null;
-            if(val == 'Weather') $clone = $weatherSelect.clone();
-
-            $cell.html('');
-            $cell.append($clone);
-            if (val != 'ItemCategoryRarity' && val != 'ItemRarity') $clone.selectize();
-        });
-    }
 
     function attachRemoveListener(node) {
         node.on('click', function(e) {
