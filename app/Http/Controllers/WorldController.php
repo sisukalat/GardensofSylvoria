@@ -404,7 +404,7 @@ class WorldController extends Controller
      */
     public function getSeasons(Request $request)
     {
-        $query = WeatherSeason::query();
+        $query = WeatherSeason::visible();
         $data = $request->only(['name', 'sort']);
         if(isset($data['name']))
             $query->where('name', 'LIKE', '%'.$data['name'].'%');
@@ -440,7 +440,7 @@ class WorldController extends Controller
      */
     public function getWeather(Request $request)
     {
-        $query = Weather::query();
+        $query = Weather::visible();
         $name = $request->get('name');
         if($name) $query->where('name', 'LIKE', '%'.$name.'%');
         return view('world.weathers', [

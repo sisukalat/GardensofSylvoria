@@ -25,6 +25,6 @@ $season = \App\Models\Weather\WeatherSeason::where('id', Settings::get('site_sea
         </div>
     </div>
 @else
-Looks like we do't have any data for the weather at the moment... stay tuned!
+Looks like we don't have any data for the weather at the moment... stay tuned!
 @endif
 @endsection
