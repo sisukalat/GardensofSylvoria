@@ -25,7 +25,7 @@
         <br>
     @endif
 <div class="form-group">
-    {!! Form::label('World Page Image (Optional)') !!} {!! add_help('This image is used only on the world information pages.') !!}
+    {!! Form::label('World Page Image (Optional)') !!} {!! add_help('This image is used on the world information pages and side widget.') !!}
     <div>{!! Form::file('image') !!}</div>
     <div class="text-muted">Recommended size: 100px x 100px</div>
     @if($season->has_image)
@@ -36,21 +36,21 @@
     @endif
 </div>
 
-        <div class="form-group">
-            {!! Form::checkbox('is_visible', 1, $season->id ? $season->is_visible : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
-            {!! Form::label('is_visible', 'Is Active', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Seasons that are not active will be hidden from the season list.') !!}
-        </div>
+<div class="form-group">
+    {!! Form::checkbox('is_visible', 1, $season->id ? $season->is_visible : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
+    {!! Form::label('is_visible', 'Is Active', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Seasons that are not active will be hidden from the season list. They also cannot be automatically set as the next active season.') !!}
+ </div>
 
 <div class="row">
     <div class="col-md-6">
         <div class="form-group">
-            {!! Form::label('cycle_at', 'Start Time (Optional)') !!} {!! add_help('Prompts cannot be submitted to the queue before the starting time.') !!}
+            {!! Form::label('cycle_at', 'Start Time') !!} {!! add_help('Seasons won\'t rotate in until this time is reached.') !!}
             {!! Form::text('cycle_at', $season->cycle_at, ['class' => 'form-control datepicker']) !!}
         </div>
     </div>
     <div class="col-md-6">
         <div class="form-group">
-            {!! Form::label('end_at', 'End Time (Optional)') !!} {!! add_help('Prompts cannot be submitted to the queue after the ending time.') !!}
+            {!! Form::label('end_at', 'End Time') !!} {!! add_help('A season won\'t be able to be automatically activated after this window of time ends.') !!}
             {!! Form::text('end_at', $season->end_at, ['class' => 'form-control datepicker']) !!}
         </div>
     </div>

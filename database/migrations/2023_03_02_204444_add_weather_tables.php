@@ -19,12 +19,10 @@ class AddWeatherTables extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('name', 64);
-
             $table->string('summary', 256)->nullable()->default(null);
             $table->text('description')->nullable()->default(null);
             $table->text('parsed_description')->nullable()->default(null);
             $table->boolean('is_visible')->default(true);
-            $table->integer('sort')->unsigned()->default(0);
             $table->boolean('has_image')->default(0);
         });
 
@@ -41,7 +39,6 @@ class AddWeatherTables extends Migration
             $table->timestamp('cycle_at')->nullable()->default(null);
             $table->timestamp('end_at')->nullable()->default(null);
             $table->boolean('is_visible')->default(true);
-            $table->integer('sort')->unsigned()->default(0);
             $table->boolean('has_image')->default(0);
         });
 
@@ -52,7 +49,6 @@ class AddWeatherTables extends Migration
             $table->integer('weather_season_id')->unsigned();
             $table->integer('weather_id')->unsigned();
             $table->integer('weight')->unsigned();  
-            $table->enum('rewardable_type', ['Weather'])->default('Weather');
             $table->foreign('weather_season_id')->references('id')->on('weather_seasons');
         });
     }

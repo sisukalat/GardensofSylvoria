@@ -444,7 +444,7 @@ class WorldController extends Controller
         $name = $request->get('name');
         if($name) $query->where('name', 'LIKE', '%'.$name.'%');
         return view('world.weathers', [
-            'weathers' => $query->orderBy('sort', 'DESC')->paginate(20)->appends($request->query()),
+            'weathers' => $query->orderBy('name', 'DESC')->paginate(20)->appends($request->query()),
         ]);
     }
 

@@ -25,7 +25,7 @@
         <br>
     @endif
 <div class="form-group">
-    {!! Form::label('World Page Image (Optional)') !!} {!! add_help('This image is used only on the world information pages.') !!}
+    {!! Form::label('World Page Image (Optional)') !!} {!! add_help('This image is used on the world information pages and side widget.') !!}
     <div>{!! Form::file('image') !!}</div>
     <div class="text-muted">Recommended size: 200px x 200px</div>
     @if($weather->has_image)
@@ -38,7 +38,7 @@
 
 <div class="form-group">
     {!! Form::checkbox('is_visible', 1, $weather->id ? $weather->is_visible : 1, ['class' => 'form-check-input', 'data-toggle' => 'toggle']) !!}
-    {!! Form::label('is_visible', 'Is Active', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Weathers that are not active will be hidden from the weather list.') !!}
+    {!! Form::label('is_visible', 'Is Active', ['class' => 'form-check-label ml-3']) !!} {!! add_help('Weathers that are not active will be hidden from the weather list. They can still be rolled on in a season table.') !!}
 </div>
 
 <div class="form-group">

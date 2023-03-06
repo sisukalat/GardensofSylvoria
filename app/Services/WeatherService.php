@@ -43,7 +43,6 @@ class WeatherService extends Service
                 $image = $data['image'];
                 unset($data['image']);
             }
-            else $data['has_image'] = 0;
 
             $this->populateSeason($season, Arr::only($data, ['weather_id', 'weight']));
 
