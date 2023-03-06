@@ -4,7 +4,7 @@
     @endif
     <div class="{{ $weather->imageUrl ? 'col-md-9' : 'col-12' }}">
         <h3>{!! $weather->displayName !!} </h3>
-        <div class="text-muted"><i>" {!! $weather->summary !!} " </i></div>
+        @if($weather->summary) <div class="text-muted"><i>" {!! $weather->summary !!} " </i></div>@endif
         <div class="world-entry-text">
         {!! $weather->description !!}
         </div>

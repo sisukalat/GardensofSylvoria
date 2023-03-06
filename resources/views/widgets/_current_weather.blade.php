@@ -10,7 +10,7 @@ $season = \App\Models\Weather\WeatherSeason::where('id', Settings::get('site_sea
         @if($weather->has_image)
         <img src="{{ $weather->imageUrl }}" alt="{{ $weather->name }}" class="img-thumbnail" />
         @endif
-        <div class="text-muted"><i>" {!! $weather->summary !!} " </i></div>
+        @if($weather->summary)<div class="text-muted"><i>" {!! $weather->summary !!} " </i></div>@endif
     </div>
 </div>
 
@@ -21,6 +21,6 @@ $season = \App\Models\Weather\WeatherSeason::where('id', Settings::get('site_sea
         @if($season->has_image)
         <img src="{{ $season->imageUrl }}" alt="{{ $season->name }}" class="img-thumbnail" />
         @endif
-        <div class="text-muted"><i>" {!! $season->summary !!} " </i></div>
+        @if($season->summary)<div class="text-muted"><i>" {!! $season->summary !!} " </i></div>@endif
     </div>
 </div>
