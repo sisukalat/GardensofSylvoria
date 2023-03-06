@@ -178,7 +178,7 @@ return [
             ],
             [
                 'name' => 'Weather',
-                'url' => 'admin/weather/seasons'
+                'url' => 'admin/weather/weathers'
             ],
         ]
     ],

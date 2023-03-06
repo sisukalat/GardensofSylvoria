@@ -124,7 +124,7 @@
 
 @if($season->id)
     <h3>Test Roll</h3>
-    <p>If you have made any modifications to the loot season contents above, be sure to save it (click the Edit button) before testing.</p>
+    <p>If you have made any modifications to the season contents above, be sure to save it (click the Edit button) before testing.</p>
     <p>Please note that due to the nature of probability, as long as there is a chance, there will always be the possibility of rolling improbably good or bad results. <i>This is not indicative of the code being buggy or poor game balance.</i> Be cautious when adjusting values based on a small sample size, including but not limited to test rolls and a small amount of user reports.</p>
     <div class="form-group">
         {!! Form::label('quantity', 'Number of Rolls') !!}
