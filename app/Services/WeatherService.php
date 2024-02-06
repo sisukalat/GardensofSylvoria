@@ -11,6 +11,7 @@ use App\Models\Weather\WeatherSeason;
 use App\Models\Weather\Weather;
 use App\Models\Weather\WeatherTable;
 
+
 class WeatherService extends Service
 {
     /*
@@ -33,6 +34,8 @@ class WeatherService extends Service
         DB::beginTransaction();
 
         try {
+
+            $data = $this->populateData($data);
 
             $season = WeatherSeason::create($data);
 
@@ -68,6 +71,8 @@ class WeatherService extends Service
 
         try {
 
+            $data = $this->populateData($data);
+
             $image = null;
             if(isset($data['image']) && $data['image']) {
                 $data['has_image'] = 1;
@@ -75,21 +80,9 @@ class WeatherService extends Service
                 unset($data['image']);
             }
 
-            isset($data['is_visible']) && $data['is_visible'] ? $data['is_visible'] : $data['is_visible'] = 0;
-
             $season->update($data);
 
             if ($image) $this->handleImage($image, $season->imagePath, $season->imageFileName);
-
-            if(isset($data['remove_image']))
-            {
-                if($season && $season->has_image && $data['remove_image'])
-                {
-                    $season->has_image = 0;
-                    $season->save();
-                }
-                unset($data['remove_image']);
-            }
 
             $this->populateSeason($season, Arr::only($data, ['weather_id','weight','rewardable_type']));
 
@@ -159,6 +152,8 @@ class WeatherService extends Service
 
         try {
 
+            $data = $this->populateWeatherData($data);
+
             $image = null;
             if(isset($data['image']) && $data['image']) {
                 $data['has_image'] = 1;
@@ -191,6 +186,8 @@ class WeatherService extends Service
 
         try { 
 
+            $data = $this->populateWeatherData($data);
+
             $image = null;
             if(isset($data['image']) && $data['image']) {
                 $data['has_image'] = 1;
@@ -198,25 +195,10 @@ class WeatherService extends Service
                 unset($data['image']);
             }
 
-            if(isset($data['description']) && $data['description']) $data['parsed_description'] = parse($data['description']);
-
-            isset($data['is_visible']) && $data['is_visible'] ? $data['is_visible'] : $data['is_visible'] = 0;
 
             $weather->update($data);
 
             if ($image) $this->handleImage($image, $weather->imagePath, $weather->imageFileName);
-
-            if(isset($data['remove_image']))
-                {
-                    if($weather && $weather->has_image && $data['remove_image'])
-                    {
-                        $data['has_image'] = 0;
-                        $this->deleteImage($weather->imagePath, $weather->imageFileName);
-                    }
-                    unset($data['remove_image']);
-                    $weather->has_image = 0;
-                    $weather->save();
-                }
 
             return $this->commitReturn($weather);
         } catch(\Exception $e) {
