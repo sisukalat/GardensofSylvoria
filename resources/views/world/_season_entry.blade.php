@@ -5,6 +5,6 @@
     <div class="{{ $season->imageUrl ? 'col-md-9' : 'col-12' }}">
     <h3>{!! $season->displayName !!}</h3>
     @if($season->summary)<div class="text-muted"><i>" {!! $season->summary !!} " </i></div>@endif
-        {!! $season->description !!}
+        {!! $season->parsed_description !!}
     </div>
 </div>

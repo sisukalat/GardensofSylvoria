@@ -6,7 +6,7 @@
         <h3>{!! $weather->displayName !!} </h3>
         @if($weather->summary) <div class="text-muted"><i>" {!! $weather->summary !!} " </i></div>@endif
         <div class="world-entry-text">
-        {!! $weather->description !!}
+        {!! $weather->parsed_description !!}
         </div>
     </div>
 </div>
