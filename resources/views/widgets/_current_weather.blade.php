@@ -2,6 +2,7 @@
 $weather = \App\Models\Weather\Weather::where('id', Settings::get('site_weather'))->first();
 $season = \App\Models\Weather\WeatherSeason::where('id', Settings::get('site_season'))->first();
 @endphp
+@if($weather)
 <br>
 <div class="card mb-4">
     <div class="card-body text-center">
@@ -13,7 +14,9 @@ $season = \App\Models\Weather\WeatherSeason::where('id', Settings::get('site_sea
         @if($weather->summary)<div class="text-muted"><i>" {!! $weather->summary !!} " </i></div>@endif
     </div>
 </div>
+@endif
 
+@if($season)
 <div class="card mb-4">
     <div class="card-body text-center">
     Current Season: 
@@ -24,3 +27,4 @@ $season = \App\Models\Weather\WeatherSeason::where('id', Settings::get('site_sea
         @if($season->summary)<div class="text-muted"><i>" {!! $season->summary !!} " </i></div>@endif
     </div>
 </div>
+@endif

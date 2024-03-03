@@ -22,6 +22,7 @@ use App\Models\User\User;
 use App\Models\Weather\Weather;
 use App\Models\Weather\WeatherSeason;
 use App\Models\Weather\WeatherTable;
+use Settings;
 
 class WorldController extends Controller
 {
@@ -456,6 +457,9 @@ class WorldController extends Controller
      */
     public function getForecast(Request $request)
     {
-        return view('world.forecast');
+        return view('world.forecast',[
+            'weather' => Weather::where('id', Settings::get('site_weather'))->first(),
+            'season' => WeatherSeason::where('id', Settings::get('site_season'))->first()
+        ]);
     }
 }
