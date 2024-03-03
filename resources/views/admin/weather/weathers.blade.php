@@ -26,7 +26,7 @@
         </div>
         @foreach($weathers as $weather)
         <div class="d-flex row flex-wrap col-12 mt-1 pt-1 px-0 ubt-top">
-          <div class="col-3 col-md-2 ">{{ $weather->name }}</div>
+          <div class="col-3 col-md-2 ">{{ $weather->name }} (#{{ $weather->id }})</div>
           <div class="col-3 col-md-4">{{ $weather->is_visible ? 'Visible' : ' '}}</div>
           <div class="col-3 col-md-5">@if(Settings::get('site_weather') == $weather->id) <i class="text-success fas fa-check"></i>@endif</div>
           <div class="col-3 col-md-1 text-right"><a href="{{ url('admin/weather/weathers/edit/'.$weather->id) }}" class="btn btn-primary py-0 px-2">Edit</a></div>
