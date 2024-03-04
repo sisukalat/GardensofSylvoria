@@ -24,6 +24,8 @@ class HolService extends Service
         DB::beginTransaction();
 
         try {
+            if(!isset($data['guess'])) throw new \Exception('You must make a guess.');
+
             $number = $data['number'];
 
             //roll second number
