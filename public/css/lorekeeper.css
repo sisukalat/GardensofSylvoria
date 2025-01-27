@@ -13,6 +13,10 @@
     src: url(../webfonts/Lato-Regular.ttf)
 }
 
+@font-face {
+    font-family: Comfortaa;
+    src: url(https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap)
+}
 /**************************************************************************************************
     
     Base styles
@@ -22,7 +26,7 @@
 h1, h2, h3, h4, h5,
 .h1, .h2, .h3, .h4, .h5 {
     text-transform: uppercase;
-    font-family: Roboto Condensed, serif; 
+    font-family: Comfortaa, serif; 
     font-weight: bold;
 }
 
@@ -46,7 +50,7 @@ a:hover {
 
 body {
     background-color: transparent;
-    font-family: Lato, sans-serif; 
+    font-family: Comfortaa, serif; 
     min-height: 100vh;
     font-size: 80%;
 }
