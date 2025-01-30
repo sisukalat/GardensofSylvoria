@@ -72,6 +72,7 @@ class CharacterManager extends Service
 
         $result = format_masterlist_number($number + 1, $digits);
 
+
         return $result;
     }
 
@@ -1139,6 +1140,7 @@ class CharacterManager extends Service
             $characterData['sale_value'] = isset($data['sale_value']) ? $data['sale_value'] : 0;
             $characterData['transferrable_at'] = isset($data['transferrable_at']) ? $data['transferrable_at'] : null;
             if($character->is_myo_slot) $characterData['name'] = (isset($data['name']) && $data['name']) ? $data['name'] : null;
+            if($character->is_myo_slot) $characterData['name'] = (isset($data['name']) && $data['name']) ? $data['name'] : null;
 
             // Needs to be cleaned up
             $result = [];
@@ -1959,6 +1961,7 @@ is_object($sender) ? $sender->id : null,
             }
 
             return $this->commitReturn(true);
+        } catch(\Exception $e) {
         } catch(\Exception $e) {
             $this->setError('error', $e->getMessage());
         }
