@@ -1,7 +1,7 @@
 <h1>Welcome, {!! Auth::user()->displayName !!}!</h1>
 <div class="card mb-4 timestamp">
     <div class="card-body">
-        <i class="far fa-clock"></i> {!! LiveClock() !!}
+        <i class="far fa-clock"></i> {!! LiveClock("America/New_York") !!}
     </div>
 </div>
 <div class="row">
