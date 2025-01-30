@@ -1,3 +1,5 @@
+<div><i class="far fa-clock"></i> {!! LiveClock("America/New_York") !!}</div>
+
 <nav class="navbar navbar-expand-md navbar-light">
     <ul class="navbar-nav ml-auto mr-auto">
         <li class="nav-item"><a href="{{ url('info/about') }}" class="nav-link">About</a></li>
@@ -10,5 +12,5 @@
         <li class="nav-item"><a href="{{ url('credits') }}" class="nav-link">Credits</a></li>
     </ul>
 </nav>
-<div><i class="far fa-clock"></i> {!! LiveClock("America/New_York") !!}</div>
+
 <div class="copyright">&copy; {{ config('lorekeeper.settings.site_name', 'Lorekeeper') }} v{{ config('lorekeeper.settings.version') }} {{ Carbon\Carbon::now()->year }}</div>
