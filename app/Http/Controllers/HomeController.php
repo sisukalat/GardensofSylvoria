@@ -40,10 +40,7 @@ class HomeController extends Controller
         else $character = null;
         return view('welcome', [
             'about' => SitePage::where('key', 'about')->first(),
-<<<<<<< HEAD
-=======
             'featured' => $character,
->>>>>>> dee57d268a043afea026af883429bf0b18d090f8
         ]);
     }
 
