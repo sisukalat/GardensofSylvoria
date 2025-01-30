@@ -3,8 +3,8 @@
 @section('title') Subtypes @endsection
 
 @section('content')
-{!! breadcrumbs(['World' => 'world', 'Subtypes' => 'world/subtypes']) !!}
-<h1>Subtypes</h1>
+{!! breadcrumbs(['World' => 'world', 'Natures' => 'world/subtypes']) !!}
+<h1>Natures</h1>
 
 <div>
     {!! Form::open(['method' => 'GET', 'class' => 'form-inline justify-content-end']) !!}

@@ -23,7 +23,7 @@
         </div>
 
         <div class="form-group">
-            {!! Form::label('subtype_id', 'Species Subtype') !!}
+            {!! Form::label('subtype_id', 'Species Nature') !!}
             @if($request->character->is_myo_slot && $request->character->image->subtype_id)
                 <div class="alert alert-secondary">{!! $request->character->image->subtype->displayName !!}</div>
             @else

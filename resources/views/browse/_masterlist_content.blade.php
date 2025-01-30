@@ -21,7 +21,7 @@
                         {!! Form::select('character_category_id', $categories, Request::get('character_category_id'), ['class' => 'form-control']) !!}
                     </div>
                     <div class="masterlist-search-field">
-                        {!! Form::label('subtype_id', 'Species Subtype: ') !!}
+                        {!! Form::label('subtype_id', 'Species Nature: ') !!}
                         {!! Form::select('subtype_id', $subtypes, Request::get('subtype_id'), ['class' => 'form-control']) !!}
                     </div>
                 @endif
