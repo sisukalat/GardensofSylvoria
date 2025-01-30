@@ -105,6 +105,12 @@ class AddSiteSettings extends Command
 
         $this->addSiteSetting('featured_character', 1, 'ID of the currently featured character.');
 
+        $this->addSiteSetting('site_season', 0, 'ID of the season the site is currently experiencing.');
+
+        $this->addSiteSetting('site_weather', 0, 'ID of the weather the site is currently experiencing.');
+
+        $this->addSiteSetting('site_weather_cycle', 0, '0 = Do not cycle, 1 = Daily, 2 = Weekly, 3 = Monthly');
+
         $this->line("\nSite settings up to date!");
 
     }
