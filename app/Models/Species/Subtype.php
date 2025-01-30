@@ -85,7 +85,7 @@ class Subtype extends Model
      */
     public function getNameWithSpeciesAttribute()
     {
-        return $this->name . ' [' . $this->species->name . ' Subtype]';
+        return $this->name . ' [' . $this->species->name . ' Natures]';
     }
     
     /**

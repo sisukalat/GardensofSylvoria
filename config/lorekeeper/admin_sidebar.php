@@ -149,7 +149,7 @@ return [
                 'url' => 'admin/data/species'
             ],
             [
-                'name' => 'Subtypes',
+                'name' => 'Natures',
                 'url' => 'admin/data/subtypes'
             ],
             [
