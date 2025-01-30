@@ -13,3 +13,7 @@
 @section('sidebar')
     @include('pages._sidebar')
 @endsection
+
+@section('sidebar')
+    @include('widgets._current_weather')
+@endsection

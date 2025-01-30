@@ -149,3 +149,4 @@ class ShopManager extends Service
         return $limit;
     }
 }
+
