@@ -12,5 +12,13 @@ return [
     //     'version' => '1.0.0',
     // ],
     
+	'coowners' => [
+         'key' => 'coowners',
+         'wiki_key' => 'Co-Owners',
+         'creators' => json_encode([
+            'Ne-wt' => 'https://github.com/Ne-wt/',
+         ]),
+         'version' => '1.1.0',
+     ],
 
 ];
