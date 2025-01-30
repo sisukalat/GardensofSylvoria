@@ -7,11 +7,25 @@ use App\Services\LinkService;
 use App\Services\UserService;
 use Auth;
 use Carbon\Carbon;
+<<<<<<< HEAD
 use Config;
 use DB;
+=======
+use Settings;
+
+>>>>>>> dee57d268a043afea026af883429bf0b18d090f8
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 
+<<<<<<< HEAD
+=======
+use App\Models\SitePage;
+use App\Models\Character\Character;
+
+use App\Services\LinkService;
+use App\Services\DeviantArtService;
+use App\Services\UserService;
+>>>>>>> dee57d268a043afea026af883429bf0b18d090f8
 class HomeController extends Controller
 {
     /*
@@ -30,8 +44,16 @@ class HomeController extends Controller
      */
     public function getIndex()
     {
+        if(Settings::get('featured_character')) {
+            $character = Character::find(Settings::get('featured_character'));
+        }
+        else $character = null;
         return view('welcome', [
             'about' => SitePage::where('key', 'about')->first(),
+<<<<<<< HEAD
+=======
+            'featured' => $character,
+>>>>>>> dee57d268a043afea026af883429bf0b18d090f8
         ]);
     }
 
