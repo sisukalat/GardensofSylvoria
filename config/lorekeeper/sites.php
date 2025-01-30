@@ -32,9 +32,9 @@ return [
 
         // Auth is for whether or not the site should offer this provider as an option for users
         // to authenticate with,
-        'auth' => 1,
+        'auth' => 0,
         // while primary alias is whether or not an alias on this site can be a user's primary alias.
-        'primary_alias' => 1,
+        'primary_alias' => 0,
     ],
 
     'toyhouse' => [
